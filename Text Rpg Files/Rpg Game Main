@@ -1,0 +1,107 @@
+import random
+import pygame
+from Actors import Wizard, Creature
+
+
+def main():
+    print_header()
+    game_loop()
+
+
+def print_header():
+    print('_________________________________')
+    print("Welcome To This Game")
+    print("Enter P For Controls")
+    print("Enter N To Exit")
+    print('_________________________________')
+    print()
+
+
+def game_loop():
+    creatures = [
+        Creature('Random PlaceHolder Name', 12)
+    ]
+
+    hero = Wizard('Generic Wizard Name', 360)
+
+    legal_locs = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
+                  (2, 0),
+                  (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (4, 0),
+                  (4, 1),
+                  (4, 2), (4, 3), (4, 4), (4, 5), (5, 0), (5, 1), (5, 2), (5, 3), (5, 4), (5, 5)]
+    potion = (random.randint(0, 100))
+    myxpos = 0
+    myypos = 0
+    current_room = "(0, 0)"
+    print('You Are Starting With {} Potions'.format(potion))
+    print("Your Position Is Starting At {}".format(current_room))
+    while True:
+        action = input('What Is Your Move? : ')
+        if action == "p":
+            print("P= Controls/"
+                  " E= Use Potion/"
+                  " A= Move West/"
+                  " D= Move East/"
+                  " W= Move North/"
+                  " S= Move South/"
+                  " Q= My Current Location/"
+                  " You Can Combine Directions, Example: wd = Move Northeast/"
+                  " N= Exit Game")
+        elif action == "e":
+            potion = potion - 1
+            print("You Have {} Potions Left".format(potion))
+        elif potion == 0:
+            potion = potion + 1
+            print("You Are Out Of Potions!")
+        elif action == "a":
+            myxpos = myxpos - 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "d":
+            myxpos = myxpos + 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "s":
+            myypos = myypos - 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "w":
+            myypos = myypos + 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "q":
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "wa":
+            myxpos = myxpos - 1
+            myypos = myypos + 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "wd":
+            myxpos = myxpos + 1
+            myypos = myypos + 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "sa":
+            myxpos = myxpos - 1
+            myypos = myypos - 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "sd":
+            myxpos = myxpos + 1
+            myypos = myypos - 1
+            print("You Are Standing At {},{}".format(myxpos, myypos))
+        elif action == "n":
+            print("You Are Now Exiting This Game")
+            break
+
+        else:
+            print("This Is Not A Valid Action")
+
+
+
+        if myxpos >= legal_locs:
+            myxpos = myxpos - 1
+        if myxpos <= legal_locs:
+            myxpos = myxpos + 1
+        if myypos >= legal_locs:
+            myypos = myypos - 1
+        if myypos <= legal_locs:
+            myypos = myypos + 1
+
+
+
+if __name__ == '__main__':
+    main()
